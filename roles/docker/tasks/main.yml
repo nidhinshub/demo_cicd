@@ -1,10 +1,10 @@
 ---
-- name: install docker
+- name: Install docker
   yum:
     name='docker'
     state=latest
 
-- name: service docker
+- name: Starting Docker
   service:
     name=docker
     state=started

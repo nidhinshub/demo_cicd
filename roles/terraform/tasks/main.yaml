@@ -9,6 +9,7 @@
 #  wait_for: timeout=30
 
 - name: Unzip Terraform
-  shell: unzip /tmp/terraform_{{ tf_ver }}_linux_amd64.zip
-  args: 
-   chdir: /usr/bin
+  unarchive: 
+    src: /tmp/terraform_{{ tf_ver }}_linux_amd64.zip
+    dest: /usr/bin
+    copy: no
