@@ -1,0 +1,13 @@
+---
+- name: Setting up CI CD tools
+  hosts: all
+  gather_facts: true
+  become: true
+  vars:
+    tf_ver: '0.11.5' 
+  tasks:
+  roles:
+    - role: git
+    - role: docker
+    - role: terraform
+    - role: jenkins
