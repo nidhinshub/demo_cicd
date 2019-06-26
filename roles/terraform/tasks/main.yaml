@@ -5,11 +5,19 @@
    url: https://releases.hashicorp.com/terraform/{{ tf_ver }}/terraform_{{ tf_ver }}_linux_amd64.zip
    dest: /tmp
 
-#- name: Sleep for 30 seconds and continue with play
-#  wait_for: timeout=30
-
 - name: Unzip Terraform
   unarchive: 
     src: /tmp/terraform_{{ tf_ver }}_linux_amd64.zip
+    dest: /usr/bin
+    copy: no
+
+- name: Download Terraform Inventory
+  get_url:
+   url: https://github.com/adammck/terraform-inventory/releases/download/{{ tfi_ver }}/terraform-inventory_{{ tfi_ver }}_linux_amd64.zip
+   dest: /tmp
+
+- name: Unzip Terraform Inventory
+  unarchive: 
+    src: /tmp/terraform-inventory_{{ tfi_ver }}_linux_amd64.zip
     dest: /usr/bin
     copy: no

@@ -1,0 +1,41 @@
+---
+- name: Start Docker registry
+  docker_container:
+   name: my_registry
+   state: started
+   image: registry:2.7
+   pull: true
+   ports:
+   - "5000:5000"
+    
+#- name: Start Jenkins
+#  docker_container:
+#   name: jenkins_master
+#   state: started
+#   image: jenkins/jenkins:lts
+#   pull: true
+#   ports:
+#   - "8080:8080"
+#   - "50000:50000"
+  
+
+- name: Waiting for 10 secs 
+  wait_for: timeout=10
+
+- name: Container status
+  shell: docker ps
+  changed_when: false
+  register: psout
+
+- name: Container Status
+  debug:
+    var: psout.stdout_lines
+
+#- name: Jenkins initial Passwd
+#  shell: docker exec -it jenkins_master cat /var/jenkins_home/secrets/initialAdminPassword
+#  changed_when: false
+#  register: jenkinspasswd
+
+#- name: Print Jenkins Passwd
+#  debug:
+#    var: jenkinspasswd.stdout_lines

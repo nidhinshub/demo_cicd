@@ -5,9 +5,11 @@
   become: true
   vars:
     tf_ver: '0.11.5' 
+    tfi_ver: 'v0.8' 
   tasks:
   roles:
     - role: git
     - role: docker
     - role: terraform
+    - role: jenkins-docker
     - role: jenkins

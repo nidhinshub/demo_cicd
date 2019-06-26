@@ -31,6 +31,28 @@ resource "aws_security_group" "allow_jenkins" {
    cidr_blocks = ["0.0.0.0/0"]
   }
 }
+resource "aws_security_group" "allow_mygo" {
+  name        = "allow-mygo"
+  description = "Allow mygo inbound traffic"
+
+ ingress {
+   from_port   = 60419
+   to_port     = 60419
+   protocol    = "tcp"
+   cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+resource "aws_security_group" "allow_registry" {
+  name        = "allow-registry"
+  description = "Allow registry inbound traffic"
+
+ ingress {
+   from_port   = 5000
+   to_port     = 5000
+   protocol    = "tcp"
+   cidr_blocks = ["0.0.0.0/0"]
+  }
+}
 resource "aws_security_group" "allow_outbound" {
   name        = "allow-all-outbound"
   description = "Allow all outbound traffic"

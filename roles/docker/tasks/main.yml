@@ -2,7 +2,7 @@
 - name: Install docker
   yum:
     name='docker'
-    state=latest
+    state=present
 
 - name: Starting Docker
   service:
@@ -10,8 +10,34 @@
     state=started
     enabled=yes
 
+- name: jenkins to docker group
+  user:
+    name: jenkins
+    groups: docker
+    append: yes
+
+- name: jenkins to sudo
+  copy:
+    content: 'jenkins ALL=(ALL:ALL) NOPASSWD: ALL'
+    dest: /etc/sudoers.d/wheel_nopasswd
+    mode: 0440
+
 - name: Ensure docker-compose is installed and available
   get_url: 
     url : https://github.com/docker/compose/releases/download/1.7.0-rc1/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}
     dest: /usr/bin/docker-compose
     mode: 'u+x,g+x'
+
+- name: Installing pip
+  yum:
+    name='python-pip'
+    state=present
+
+- name: Install docker-py
+  pip: name=docker-py
+
+#- name: Docker Login
+#  docker_login:
+#    email: "EMAIL"
+#    username: "USERNAME"
+#    paswweord: "PASSWORD"
