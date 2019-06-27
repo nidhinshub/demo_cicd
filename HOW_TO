@@ -3,6 +3,8 @@ from the repository demo_cicd master branch
 
 Also you need to fork the repository demo_cicd to your github
 
+https://github.com/ajoybharath/demo_cicd.git
+
 A pipeline build for invoking terraform
 
 1. New pipeline job is created
