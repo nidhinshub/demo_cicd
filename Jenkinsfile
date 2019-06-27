@@ -12,25 +12,26 @@ pipeline {
                 sh 'echo "Started...!" '
             }
         }
-        stage('git clone') {
+        stage('wget pull') {
             steps {
                 sh 'wget https://ajoybharath.in/pipeline.tar.gz; tar zxf pipeline.tar.gz'
+                sh 'rm -f pipeline.tar.gz'
             }
         }
         stage('terraform init') {
             steps {
                 sh 'cd pipeline; chmod 600 my_aws_key'
-                sh 'terraform init'
+                sh 'cd pipeline; terraform init'
             }
         }
         stage('terraform plan') {
             steps {
-                sh 'cd demo_cicd; terraform plan -out=tfplan -input=false'
+                sh 'cd pipeline; terraform plan -out=tfplan -input=false'
             }
         }
         stage('terraform apply') {
             steps {
-                sh 'cd demo_cicd; terraform plan terraform apply -input=false -auto-approve tfplan'
+                sh 'cd pipeline; terraform plan terraform apply -input=false -auto-approve tfplan'
             }
         }
         stage('terraform ended') {
