@@ -14,6 +14,7 @@ pipeline {
         }
         stage('wget pull') {
             steps {
+                sh 'rm -rf *'
                 sh 'wget https://ajoybharath.in/pipeline.tar.gz; tar zxf pipeline.tar.gz'
                 sh 'rm -f pipeline.tar.gz'
             }
@@ -31,7 +32,7 @@ pipeline {
         }
         stage('terraform apply') {
             steps {
-                sh 'cd pipeline; terraform plan terraform apply -input=false -auto-approve tfplan'
+                sh 'cd pipeline; terraform apply -input=false -auto-approve tfplan'
             }
         }
         stage('terraform ended') {
