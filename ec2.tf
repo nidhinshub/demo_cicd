@@ -27,11 +27,12 @@ data "aws_ami" "amazon-linux-2" {
 resource "aws_instance" "web" {
   ami             = "${data.aws_ami.amazon-linux-2.id}"
   instance_type   = "t2.micro"
- key_name = "${aws_key_pair.my_web_key.key_name}"
+  key_name = "${aws_key_pair.my_web_key.key_name}"
 
   security_groups = [
     "${aws_security_group.allow_ssh.name}",
     "${aws_security_group.allow_outbound.name}",
+    "${aws_security_group.allow_app.name}"
 ]
 
   tags {
@@ -45,7 +46,7 @@ resource "aws_instance" "web" {
       host  = "${self.public_ip}" 
       type      = "ssh"
       user      = "ec2-user"
-      private_key = "${file(var.ssh_private_key)}"
+      private_key = "${file(var.ssh_key)}"
     }
   }
 

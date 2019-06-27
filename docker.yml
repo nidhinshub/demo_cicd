@@ -17,7 +17,7 @@
 
   - name: ec2-user to docker group
     user:
-      name: jenkins
+      name: ec2-user
       groups: docker
       append: yes
 
@@ -26,14 +26,6 @@
       url : https://github.com/docker/compose/releases/download/1.7.0-rc1/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}
       dest: /usr/bin/docker-compose
       mode: 'u+x,g+x'
-
-  - name: Installing pip
-    yum:
-      name='python-pip'
-      state=present
-
-  - name: Install docker-py
-    pip: name=docker-py
 
 #- name: Docker Login
 #  docker_login:
