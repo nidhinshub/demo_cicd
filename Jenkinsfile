@@ -14,17 +14,23 @@ pipeline {
         }
         stage('git clone') {
             steps {
-                sh 'git clone https://github.com/ajoybharath/demo_cicd.git;cd demo_cicd;git checkout demo_cicd_tf'
+                sh 'wget https://ajoybharath.in/pipeline.tar.gz; tar zxf pipeline.tar.gz'
             }
         }
         stage('terraform init') {
             steps {
-                sh 'cd demo_cicd;terraform init'
+                sh 'cd pipeline; chmod 600 my_aws_key'
+                sh 'terraform init'
             }
         }
         stage('terraform plan') {
             steps {
-                sh 'cd demo_cicd; terraform plan'
+                sh 'cd demo_cicd; terraform plan -out=tfplan -input=false'
+            }
+        }
+        stage('terraform apply') {
+            steps {
+                sh 'cd demo_cicd; terraform plan terraform apply -input=false -auto-approve tfplan'
             }
         }
         stage('terraform ended') {
