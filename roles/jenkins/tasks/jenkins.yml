@@ -21,6 +21,7 @@
   yum:
     name:
     - jenkins-2.182-1.1.noarch
+    - maven
 
 - name: Start & Enable Jenkins
   service:
@@ -28,8 +29,8 @@
     state=started
     enabled=yes
     
-- name: Sleep for 30 seconds and continue with play
-  wait_for: timeout=30
+- name: Sleep for 20 seconds and continue with play
+  wait_for: timeout=20
 
 - name: Get init password Jenkins
   shell: cat /var/lib/jenkins/secrets/initialAdminPassword
