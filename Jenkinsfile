@@ -14,7 +14,7 @@ pipeline {
         }
         stage('git clone') {
             steps {
-                sh 'sudo rm -r demo_cicd;sudo git clone https://github.com/ajoybharath/demo_cicd.git;cd demo_cicd;git checkout demo_cicd_tf'
+                sh 'git clone https://github.com/ajoybharath/demo_cicd.git;cd demo_cicd;git checkout demo_cicd_tf'
             }
         }
         stage('terraform init') {
