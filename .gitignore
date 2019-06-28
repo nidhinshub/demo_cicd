@@ -3,3 +3,4 @@ terraform.tfstate
 terraform.tfstate.backup
 .terraform
 my_aws_key.pub
+tfplan
