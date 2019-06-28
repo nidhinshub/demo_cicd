@@ -22,7 +22,7 @@ pipeline {
         stage('terraform init') {
             steps {
                 sh 'cd pipeline; chmod 600 my_aws_key'
-                sh 'cd pipeline; terraform init'
+                sh 'cd pipeline; ./plan_deploy.sh'
             }
         }
         stage('terraform plan') {
