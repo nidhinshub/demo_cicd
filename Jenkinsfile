@@ -1,4 +1,4 @@
-pipeline {
+YOURNAME {
     agent {
         node {
             label 'master'
@@ -15,24 +15,24 @@ pipeline {
         stage('wget pull') {
             steps {
                 sh 'rm -rf *'
-                sh 'wget https://ajoybharath.in/pipeline.tar.gz; tar zxf pipeline.tar.gz'
-                sh 'rm -f pipeline.tar.gz'
+                sh 'wget https://ajoybharath.in/YOURNAME.tar.gz; tar zxf YOURNAME.tar.gz'
+                sh 'rm -f YOURNAME.tar.gz'
             }
         }
         stage('terraform init') {
             steps {
-                sh 'cd pipeline; chmod 600 my_aws_key'
-                sh 'cd pipeline; terraform init'
+                sh 'cd YOURNAME; chmod 600 my_aws_key'
+                sh 'cd YOURNAME; terraform init'
             }
         }
         stage('terraform plan') {
             steps {
-                sh 'cd pipeline; terraform plan -out=tfplan -input=false'
+                sh 'cd YOURNAME; terraform plan -out=tfplan -input=false'
             }
         }
         stage('terraform apply') {
             steps {
-                sh 'cd pipeline; terraform apply -input=false -auto-approve tfplan'
+                sh 'cd YOURNAME; terraform apply -input=false -auto-approve tfplan'
             }
         }
         stage('terraform ended') {
