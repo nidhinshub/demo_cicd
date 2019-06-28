@@ -1,6 +1,6 @@
 resource "aws_instance" "my-cicd-instance" {
   ami             = "${data.aws_ami.amazon-linux-2.id}"
-  instance_type   = "t2.micro"
+  instance_type   = "t2.medium"
   key_name = "${aws_key_pair.my_aws_key.key_name}"
 
   security_groups = [
