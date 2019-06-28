@@ -17,7 +17,6 @@
 #   ports:
 #   - "8080:8080"
 #   - "50000:50000"
-  
 
 - name: Waiting for 10 secs 
   wait_for: timeout=10
