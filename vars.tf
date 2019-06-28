@@ -13,5 +13,5 @@ variable "aws_region" {
 }
 
 variable "ssh_key" {
-    default = "/home/akbharat/.ssh/my_aws_key"
+    default = "./my_aws_key"
 }
