@@ -32,7 +32,7 @@ YOURNAME {
         }
         stage('terraform apply') {
             steps {
-                sh 'cd YOURNAME; terraform apply -input=false -auto-approve tfplan'
+                sh 'cd YOURNAME; ./deploy_instance.sh'
             }
         }
         stage('terraform ended') {
