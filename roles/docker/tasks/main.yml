@@ -29,6 +29,16 @@
     dest: /usr/bin/docker-compose
     mode: 'u+x,g+x'
 
+- name: Installing Golang
+  yum:
+    name='golang'
+    state=present
+
+- name: Adding GO Variables
+  copy:
+    src: go.sh
+    dest: /etc/profile.d/
+
 - name: Installing pip
   yum:
     name='python-pip'
