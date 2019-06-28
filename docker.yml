@@ -21,6 +21,14 @@
       groups: docker
       append: yes
 
+  - name: Installing pip
+    yum:
+      name='python-pip'
+      state=present
+
+  - name: Install docker-py
+    pip: name=docker-py
+
   - name: Ensure docker-compose is installed and available
     get_url: 
       url : https://github.com/docker/compose/releases/download/1.7.0-rc1/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}

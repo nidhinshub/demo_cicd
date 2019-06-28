@@ -9,13 +9,24 @@ resource "aws_security_group" "allow_ssh" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+resource "aws_security_group" "allow_jenkins" {
+  name        = "allow-jenkins"
+  description = "Allow jenkins inbound traffic"
+
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
 resource "aws_security_group" "allow_app" {
   name        = "allow-app"
   description = "Allow app inbound traffic"
 
   ingress {
-    from_port   = 9001
-    to_port     = 9001
+    from_port   = 5000
+    to_port     = 5000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }

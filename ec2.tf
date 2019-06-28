@@ -26,13 +26,14 @@ data "aws_ami" "amazon-linux-2" {
 
 resource "aws_instance" "web" {
   ami             = "${data.aws_ami.amazon-linux-2.id}"
-  instance_type   = "t2.micro"
+  instance_type   = "t2.medium"
   key_name = "${aws_key_pair.my_web_key.key_name}"
 
   security_groups = [
     "${aws_security_group.allow_ssh.name}",
     "${aws_security_group.allow_outbound.name}",
-    "${aws_security_group.allow_app.name}"
+    "${aws_security_group.allow_app.name}",
+    "${aws_security_group.allow_jenkins.name}"
 ]
 
   tags {
