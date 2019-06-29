@@ -36,7 +36,7 @@ resource "aws_instance" "web" {
     "${aws_security_group.allow_jenkins.name}"
 ]
 
-  tags {
+  tags = {
     Name = "WebApp"
   }
 

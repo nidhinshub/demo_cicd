@@ -35,6 +35,24 @@
       dest: /usr/bin/docker-compose
       mode: 'u+x,g+x'
 
+  - name: Jenkins Blue Ocean
+    docker_container:
+      name: jenkins_blueocean
+      state: started
+      image: jenkinsci/blueocean
+      pull: true
+      ports:
+        - "8888:8080"
+        - "50000:50000"
+
+  - name: Jenkins Initial password
+    shell: docker exec -it jenkins_blueocean cat /var/jenkins_home/secrets/initialAdminPassword
+    changed_when: false
+    register: jenkinspasswd
+  - name: Print Password
+    debug:
+      var: jenkinspasswd.stdout_lines
+
 #- name: Docker Login
 #  docker_login:
 #    email: "EMAIL"
