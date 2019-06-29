@@ -1,4 +1,4 @@
-tf_test {
+pipeline {
     agent {
         node {
             label 'master'
